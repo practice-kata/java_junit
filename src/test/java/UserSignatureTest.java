@@ -2,7 +2,6 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
-import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,7 +20,7 @@ public class UserSignatureTest {
         @Theory
         public void パスワード閾値テスト(Fixture pattern) {
             //given
-            User user = new User("kanai", "PD", pattern.password);
+            User user = new UserBuilder().setPassword(pattern.password).build();
             //when
             boolean actual = user.validate();
             //then
@@ -35,6 +34,20 @@ public class UserSignatureTest {
             public Fixture(String password, boolean expected) {
                 this.password = password;
                 this.expected = expected;
+            }
+        }
+
+        private class UserBuilder {
+
+            private String password;
+
+            public UserBuilder setPassword(String password) {
+                this.password = password;
+                return this;
+            }
+
+            public User build() {
+                return new User("", "", password);
             }
         }
     }
