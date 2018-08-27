@@ -56,18 +56,18 @@ public class UserSignatureTest {
     public static class 署名の取得 {
 
         @DataPoints
-        public static UserData[] patterns(){
-            return new UserData[] {
-                    new UserData().setExpected("tanaka: PD OK"),
-                    new UserData().setName("yamada").setExpected("yamada: PD OK"),
-                    new UserData().setCompanyName("MJ").setExpected("tanaka: MJ OK"),
-                    new UserData().setPassord("passwor").setExpected("tanaka: PD NG"),
-                    new UserData().setCompanyName("").setExpected("tanaka OK"),
+        public static UserDataBuilder[] patterns(){
+            return new UserDataBuilder[] {
+                    new UserDataBuilder().setExpected("tanaka: PD OK"),
+                    new UserDataBuilder().setName("yamada").setExpected("yamada: PD OK"),
+                    new UserDataBuilder().setCompanyName("MJ").setExpected("tanaka: MJ OK"),
+                    new UserDataBuilder().setPassord("passwor").setExpected("tanaka: PD NG"),
+                    new UserDataBuilder().setCompanyName("").setExpected("tanaka OK"),
             };
         }
 
         @Theory
-        public void 署名取得パターン(UserData pattern){
+        public void 署名取得パターン(UserDataBuilder pattern){
             //given
             User user = new User(pattern.name, pattern.companyName, pattern.password);
             //when
@@ -76,28 +76,28 @@ public class UserSignatureTest {
             assertEquals(pattern.expected, actual);
         }
 
-        private static class UserData {
+        private static class UserDataBuilder {
             private String name = "tanaka";
             private String companyName = "PD";
             private String password = "password";
             private String expected;
 
-            public UserData setName(String name) {
+            public UserDataBuilder setName(String name) {
                 this.name = name;
                 return this;
             }
 
-            public UserData setCompanyName(String companyName) {
+            public UserDataBuilder setCompanyName(String companyName) {
                 this.companyName = companyName;
                 return this;
             }
 
-            public UserData setPassord(String s) {
+            public UserDataBuilder setPassord(String s) {
                 this.password = s;
                 return this;
             }
 
-            public UserData setExpected(String s) {
+            public UserDataBuilder setExpected(String s) {
                 this.expected = s;
                 return this;
             }
