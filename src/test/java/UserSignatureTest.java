@@ -4,6 +4,8 @@ import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(Enclosed.class)
@@ -24,7 +26,7 @@ public class UserSignatureTest {
             //when
             boolean actual = user.validate();
             //then
-            assertEquals(pattern.expected, actual);
+            assertThat(pattern.expected, is(actual));
         }
 
         private static class Fixture {
@@ -73,7 +75,7 @@ public class UserSignatureTest {
             //when
             String actual = user.signature();
             //then
-            assertEquals(pattern.expected, actual);
+            assertThat(pattern.expected, is(actual));
         }
 
         private static class UserDataBuilder {
