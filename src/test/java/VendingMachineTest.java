@@ -57,7 +57,9 @@ public class VendingMachineTest {
     public void inventory() {
         VendingMachine vendingMachine = new VendingMachine();
         assertThat(vendingMachine.inventory(), is("coke 120yen: 5"));
-//        vendingMachine.addDrink("water", "100");
-//        assertThat(vendingMachine.inventory(), is("coke 120yen: 5\nwater 100yen: 1"));
+        vendingMachine.addDrink("coke", "120");
+        assertThat(vendingMachine.inventory(), is("coke 120yen: 6"));
+        vendingMachine.addDrink("water", "100");
+        assertThat(vendingMachine.inventory(), is("coke 120yen: 6\nwater 100yen: 1"));
     }
 }

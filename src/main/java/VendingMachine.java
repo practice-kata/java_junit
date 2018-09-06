@@ -1,4 +1,6 @@
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class VendingMachine {
     public List<List<String>> drinks = new ArrayList<>();
@@ -30,7 +32,22 @@ public class VendingMachine {
     }
 
     public String inventory() {
-        return "coke 120yen: 5";
+        Map<String, List<String>> map = new HashMap<>();
+        for (List<String> drink: drinks) {
+            if(map.containsKey(drink.get(0))) {
+                String size = map.get(drink.get(0)).get(1);
+                int sizeInt = Integer.valueOf(size);
+                sizeInt++;
+                map.put(drink.get(0), Arrays.asList(drink.get(1), String.valueOf(sizeInt)));
+            } else {
+                map.put(drink.get(0), Arrays.asList(drink.get(1), "1"));
+            }
+        }
+        List<String> result = new ArrayList<>();
+        map.forEach((k, v) -> {
+            result.add((k+" "+v.get(0)+"yen: "+v.get(1)));
+        });
+        return String.join("\n", result);
     }
 
     public VendingMachine addDrink(String name, String price) {
