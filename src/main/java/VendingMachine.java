@@ -54,4 +54,8 @@ public class VendingMachine {
         drinks.add(Arrays.asList(name, price));
         return this;
     }
+
+    public boolean canBy(String coke) {
+        return true;
+    }
 }

@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class VendingMachineTest {
 
@@ -61,5 +62,11 @@ public class VendingMachineTest {
         assertThat(vendingMachine.inventory(), is("coke 120yen: 6"));
         vendingMachine.addDrink("water", "100");
         assertThat(vendingMachine.inventory(), is("coke 120yen: 6\nwater 100yen: 1"));
+    }
+
+    @Test
+    public void canBuyCoke() {
+        VendingMachine vendingMachine = new VendingMachine();
+        assertEquals(vendingMachine.canBy("coke"), true);
     }
 }
