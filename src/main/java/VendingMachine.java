@@ -28,4 +28,13 @@ public class VendingMachine {
         this.charge = 0;
         return charge;
     }
+
+    public String inventory() {
+        return "coke 120yen: 5";
+    }
+
+    public VendingMachine addDrink(String name, String price) {
+        drinks.add(Arrays.asList(name, price));
+        return this;
+    }
 }

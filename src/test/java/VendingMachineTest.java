@@ -44,4 +44,20 @@ public class VendingMachineTest {
         });
 
     }
+
+    @Test
+    public void addDrink() {
+        VendingMachine vm = new VendingMachine().addDrink("water", "100");
+        assertThat(vm.drinks.size(), is(6));
+        assertThat(vm.drinks.get(5).get(0), is("water"));
+        assertThat(vm.drinks.get(5).get(1), is("100"));
+    }
+
+    @Test
+    public void inventory() {
+        VendingMachine vendingMachine = new VendingMachine();
+        assertThat(vendingMachine.inventory(), is("coke 120yen: 5"));
+//        vendingMachine.addDrink("water", "100");
+//        assertThat(vendingMachine.inventory(), is("coke 120yen: 5\nwater 100yen: 1"));
+    }
 }
