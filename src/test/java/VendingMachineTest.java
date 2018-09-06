@@ -36,7 +36,12 @@ public class VendingMachineTest {
 
     @Test
     public void has5CokeInit() {
-        VendingMachine vendingMachine = new VendingMachine();
-        assertThat(vendingMachine.drinks.size(), is(5));
+        VendingMachine vm= new VendingMachine();
+        assertThat(vm.drinks.size(), is(5));
+        vm.drinks.forEach((drink)-> {
+            assertThat(drink.get(0), is("coke"));
+            assertThat(drink.get(1), is("120"));
+        });
+
     }
 }

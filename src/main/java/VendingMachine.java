@@ -1,17 +1,15 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class VendingMachine {
-    public Map<String, Integer> drinks = new HashMap<>();
+    public List<List<String>> drinks = new ArrayList<>();
     private int charge;
 
     public VendingMachine(){
-        drinks.put("1",0);
-        drinks.put("2",0);
-        drinks.put("3",0);
-        drinks.put("4",0);
-        drinks.put("5",0);
+        drinks.add(Arrays.asList("coke", "120"));
+        drinks.add(Arrays.asList("coke", "120"));
+        drinks.add(Arrays.asList("coke", "120"));
+        drinks.add(Arrays.asList("coke", "120"));
+        drinks.add(Arrays.asList("coke", "120"));
     }
 
     public VendingMachine charge(int money) {
