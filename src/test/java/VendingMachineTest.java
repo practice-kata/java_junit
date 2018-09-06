@@ -12,4 +12,18 @@ public class VendingMachineTest {
         Integer charge2 = new VendingMachine().charge(200).currentCharge();
         assertThat(charge2, is(200));
     }
+
+    @Test
+    public void multiCharge() {
+        Integer charge = new VendingMachine().charge(100).charge(1000).currentCharge();
+        assertThat(charge, is(1100));
+    }
+
+    @Test
+    public void resetCharge() {
+        VendingMachine vm = new VendingMachine();
+        Integer change = vm.charge(100).charge(1000).resetCharge();
+        assertThat(change, is(1100));
+        assertThat(vm.currentCharge(), is(0));
+    }
 }

@@ -9,4 +9,10 @@ public class VendingMachine {
     public Integer currentCharge() {
         return charge;
     }
+
+    public Integer resetCharge() {
+        Integer charge = this.charge;
+        this.charge = 0;
+        return charge;
+    }
 }
