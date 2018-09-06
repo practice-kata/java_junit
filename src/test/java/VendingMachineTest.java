@@ -33,4 +33,10 @@ public class VendingMachineTest {
         assertThat(vm.resetCharge(), is(1100));
         assertThat(vm.currentCharge(), is(0));
     }
+
+    @Test
+    public void has5CokeInit() {
+        VendingMachine vendingMachine = new VendingMachine();
+        assertThat(vendingMachine.drinks.size(), is(5));
+    }
 }
