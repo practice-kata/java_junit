@@ -1,16 +1,24 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class VendingMachineTest {
 
     @Test
-    public void charge() {
-        Integer charge = new VendingMachine().charge(100).currentCharge();
-        assertThat(charge, is(100));
-        Integer charge2 = new VendingMachine().charge(200).currentCharge();
-        assertThat(charge2, is(200));
+    public void chargeValidMoney() {
+        for (Integer charge: Arrays.asList(10,50,500,1000)) {
+            assertThat(new VendingMachine().charge(charge).currentCharge(), is(charge));
+        }
+    }
+
+    @Test
+    public void chargeInvalidMoney() {
+        for (Integer charge : Arrays.asList(1,5,5000,10000)) {
+            assertThat(new VendingMachine().charge(charge).currentCharge(), is(0));
+        }
     }
 
     @Test
@@ -21,9 +29,8 @@ public class VendingMachineTest {
 
     @Test
     public void resetCharge() {
-        VendingMachine vm = new VendingMachine();
-        Integer change = vm.charge(100).charge(1000).resetCharge();
-        assertThat(change, is(1100));
+        VendingMachine vm = new VendingMachine().charge(100).charge(1000);
+        assertThat(vm.resetCharge(), is(1100));
         assertThat(vm.currentCharge(), is(0));
     }
 }
