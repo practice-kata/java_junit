@@ -1,10 +1,12 @@
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class VendingMachineTest {
 
@@ -64,9 +66,33 @@ public class VendingMachineTest {
         assertThat(vendingMachine.inventory(), is("coke 120yen: 6\nwater 100yen: 1"));
     }
 
-    @Test
-    public void canBuyCoke() {
-        VendingMachine vendingMachine = new VendingMachine();
-        assertEquals(vendingMachine.canBy("coke"), true);
+
+    @Nested
+    public class canBuy {
+        private VendingMachine vendingMachine;
+        @BeforeEach
+        public void before() {
+            vendingMachine = new VendingMachine();
+        }
+        @Test
+        public void lessChargeEnoughInventory() {
+            vendingMachine.addDrink("tea", "150");
+            vendingMachine.charge(100).charge(10);
+            assertThat(vendingMachine.canBy("tea"), is(false));
+            assertThat(vendingMachine.canBy("coke"), is(false));
+        }
+        @Test
+        public void enoughChargeAndInventory() {
+            vendingMachine.charge(100).charge(10).charge(10);
+            assertThat(vendingMachine.canBy("coke"), is(true));
+        }
+        @Test
+        public void lessInventoryEnoughtCharge() {
+            vendingMachine.charge(100).charge(50);
+            assertThat(vendingMachine.canBy("tea"), is(false));
+        }
     }
+
 }
+
+

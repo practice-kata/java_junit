@@ -55,7 +55,23 @@ public class VendingMachine {
         return this;
     }
 
-    public boolean canBy(String coke) {
+    public boolean canBy(String name) {
+        boolean existInventory = false;
+        for (List<String> drink : drinks) {
+            if (name == drink.get(0)) {
+                existInventory = true;
+            }
+        }
+        if (existInventory == false) {
+            return false;
+        }
+        for (List<String> drink : drinks) {
+            if(name == drink.get(0)) {
+                if (currentCharge() < Integer.valueOf(drink.get(1))) {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 }
