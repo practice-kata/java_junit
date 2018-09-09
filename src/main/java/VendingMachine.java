@@ -6,7 +6,7 @@ public class VendingMachine {
     public List<List<String>> drinks = new ArrayList<>();
     private int charge;
 
-    public VendingMachine(){
+    public VendingMachine() {
         drinks.add(Arrays.asList("coke", "120"));
         drinks.add(Arrays.asList("coke", "120"));
         drinks.add(Arrays.asList("coke", "120"));
@@ -73,5 +73,20 @@ public class VendingMachine {
             }
         }
         return true;
+    }
+
+    public void buy(String name) {
+        int price = 0;
+        Iterator<List<String>> drinkIterator = drinks.iterator();
+        while(drinkIterator.hasNext()){
+            List<String> drink = drinkIterator.next();
+            if (drink.get(0) == name){
+                price = Integer.parseInt(drink.get(1));
+                drinkIterator.remove();
+                break;
+            }
+        }
+
+        charge = currentCharge() - price;
     }
 }
