@@ -1,6 +1,4 @@
-import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 public class VendingMachine {
     public List<List<String>> drinks = new ArrayList<>();
